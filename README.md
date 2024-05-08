@@ -57,7 +57,6 @@ This project implements a feature-rich blogging tool using a three-tier architec
 
 3. Start the server:
 
-  ```bash
     npm start
 
 4. Open the application in your browser:
