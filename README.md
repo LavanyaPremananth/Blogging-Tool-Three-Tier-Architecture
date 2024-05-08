@@ -51,7 +51,6 @@ This project implements a feature-rich blogging tool using a three-tier architec
 
 2. Install dependencies:
   
-  ```bash
     cd blogging-tool
     npm install
 
