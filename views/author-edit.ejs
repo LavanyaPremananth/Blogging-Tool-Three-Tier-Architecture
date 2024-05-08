@@ -1,0 +1,113 @@
+<!-- This is the EJS template file for the author's home page
+
+It provides a form for authors to create or edit articles using
+the Quill.js editor. 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/metadata', { title: (locals.id ? 'Edit' : 'New' ) +' Article' }); %>
+  <!-- Added charset for better compatibility -->
+  <meta charset="UTF-8">
+
+  <!-- Included Bootstrap CSS -->
+  <link href="/assets/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Added Quill.js CSS -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</head>
+
+<body class="bg-light text-dark">
+  <!-- Header included from partials folder -->
+  <%- include('./partials/header'); %>
+
+  <div class="container my-4">
+    <div class="row mb-4">
+      <h1 class="text-primary border-bottom">
+        <%= locals.id ? 'Edit' : 'New draft' %> Article
+      </h1>
+      <p class="mb-0 text-muted">
+        <% if (locals.created) { %>
+          <!-- Reworded the date display for clarity -->
+          Created <%= new Date(created).toLocaleString() %>
+        <% } %>
+        <% if (locals.modified) { %>
+          <!-- Reworded the date display for clarity -->
+          | Last Modified <%= new Date(modified).toLocaleString() %>
+        <% } %>
+        <% if (locals.published) { %>
+          <!-- Reworded the date display for clarity -->
+          | Published <%= new Date(published).toLocaleString() %>
+        <% } %>
+      </p>
+    </div>
+
+    <div class="row">
+      <form method="post" action="/author/<%= locals.id ? 'edit/'+id : 'new' %>" class="col-md-8 offset-md-2">
+        <div class="mb-3">
+          <label for="title" class="form-label">Article Title</label>
+          <!-- Applied Bootstrap styles to input field -->
+          <input type="text" class="form-control" id="title" name="title" value="<%= locals.title %>" required>
+        </div>
+        <div class="mb-3">
+          <label for="subtitle" class="form-label">Article Subtitle</label>
+          <!-- Applied Bootstrap styles to input field -->
+          <input type="text" class="form-control" id="subtitle" name="subtitle" value="<%= locals.subtitle %>" required>
+        </div>
+        <div class="mb-4">
+          <label for="body" class="form-label">Article Text</label>
+          <!-- Replaced the textarea with the Quill editor container -->
+          <div id="editor-container" style="min-height: 300px;"><%= locals.body %></div>
+          <!-- Hidden textarea to hold the editor content for form submission -->
+          <textarea name="body" style="display:none;"></textarea>
+        </div>
+        <!-- Applied Bootstrap styles to buttons -->
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="submit" class="btn btn-primary me-md-2">Submit</button>
+          <a class="btn btn-secondary" href="/author" role="button">Back</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Included Bootstrap JS (for certain components) -->
+  <script src="/assets/bootstrap.bundle.min.js"></script>
+  <!-- Added Quill.js library -->
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get the container element
+      var editorContainer = document.getElementById('editor-container');
+
+      // Initialize Quill with all available modules in the toolbar
+      var quill = new Quill(editorContainer, {
+        theme: 'snow', // Use the 'snow' theme for a more traditional editor appearance
+        modules: {
+          toolbar: [
+            // Include necessary toolbar options
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            [{ 'font': [] }],
+            ['bold', 'italic', 'underline'],
+            [{ 'color': [] }],
+            [{ 'align': [] }],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['link', 'image', 'video'],
+            [{ 'script': 'sub' }, { 'script': 'super' }],
+          ],
+        }
+      });
+
+      // Get the hidden textarea for form submission
+      var hiddenTextarea = document.querySelector('textarea[name="body"]');
+
+      // Update the hidden textarea content when the editor content changes
+      quill.on('text-change', function () {
+        hiddenTextarea.value = quill.root.innerHTML;
+      });
+    });
+  </script>
+</body>
+
+</html>

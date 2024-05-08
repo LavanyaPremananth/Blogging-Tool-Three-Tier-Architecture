@@ -1,0 +1,48 @@
+<div class="card border-1 bg-light mb-3">
+  <div class="card-header bg-primary text-white border-1 d-flex justify-content-between align-items-center">
+    <!-- Displays the article title fetched from the 'title' variable -->
+    <h5 class="card-title m-0"><%= title %></h5>
+
+    <!-- Displays the number of likes with an optional 's' if there are more than 1 like -->
+    <span><%= likes %> <%= likes === 1 ? 'like' : 'likes' %></span>
+  </div>
+
+  <!-- Card body with dark text -->
+  <div class="card-body">
+    <p class="card-text fw-light m-0">
+
+      <!-- Displays the creation date of the article using 'toLocaleString()' method -->
+      Created <%= new Date(created).toLocaleString() %>
+
+      <% if (modified) { %>
+        <!-- If modified date exists, display it with a blue text color -->
+        | Modified <%= new Date(modified).toLocaleString() %>
+      <% } %>
+
+      <!-- Check if the 'published' property exists for the article -->
+      <% if (published) { %>
+        <!-- If article is published, display the publish date -->
+        | Published <%= new Date(published).toLocaleString() %>
+      <% } %>
+
+    </p>
+
+    <!-- Buttons to interact with the article, align to right with margin -->
+    <div class="d-flex justify-content-end mt-3">
+      <!-- Button to edit the article, linking to the edit page for the specific article ID -->
+      <a href="/author/edit/<%= id %>" class="btn btn-info btn-sm me-1">Edit</a>
+
+      <!-- Check if the article is published -->
+      <% if (published) { %>
+        <!-- If article is published, provide a button to read the full article -->
+        <a href="/reader/<%= id %>" class="btn btn-primary btn-sm me-1">Read article</a>
+      <% } else { %>
+        <!-- If article is not published, provide a button to publish it -->
+        <button class="btn btn-primary btn-sm me-1" onclick="publish('<%= id %>')">Publish</button>
+      <% } %>
+
+      <!-- Button to delete the article, with confirmation using 'del()' function -->
+      <button type="button" class="btn btn-danger btn-sm" onclick="del('<%= id %>')">Delete</button>
+    </div>
+  </div>
+</div>

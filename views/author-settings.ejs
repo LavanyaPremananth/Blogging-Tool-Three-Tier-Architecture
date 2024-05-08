@@ -1,0 +1,56 @@
+<!-- this is an EJS template file for the author's blog settings page -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/metadata', { title: 'Blog Settings' }); %>
+  <!-- Included Bootstrap CSS -->
+  <link href="/assets/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light text-dark">
+  <!-- Header included from partials folder -->
+  <%- include('./partials/header'); %>
+
+  <div class="container my-4">
+
+    <div class="row mb-4">
+      <h1 class="text-primary border-bottom">
+        Blog Settings
+      </h1>
+      <p class="fw-light">
+        Use this page to update the main blog settings. Authors are able to change the
+        Blog Title, Blog Subtitle, and the Author Name.
+      </p>
+    </div>
+
+    <div class="row">
+      <form method="post" action="/author/settings" class="col-md-8 offset-md-2">
+        <div class="mb-3">
+          <label for="title" class="form-label">Blog Title</label>
+          <!-- Applied Bootstrap styles to input field -->
+          <input type="text" class="form-control" id="title" name="title" value="<%= title %>" required>
+        </div>
+        <div class="mb-3">
+          <label for="subtitle" class="form-label">Blog Subtitle</label>
+          <!-- Applied Bootstrap styles to input field -->
+          <input type="text" class="form-control" id="subtitle" name="subtitle" value="<%= subtitle %>" required>
+        </div>
+        <div class="mb-4">
+          <label for="author" class="form-label">Author Name</label>
+          <!-- Applied Bootstrap styles to input field -->
+          <input type="text" class="form-control" id="author" name="author" value="<%= author %>" required>
+        </div>
+        <!-- Applied Bootstrap styles to buttons -->
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="submit" class="btn btn-primary me-md-2">Submit</button>
+          <a class="btn btn-secondary" href="/author" role="button">Back</a>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</body>
+
+</html>

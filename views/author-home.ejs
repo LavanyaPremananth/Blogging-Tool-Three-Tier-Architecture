@@ -1,0 +1,79 @@
+<!-- This is the EJS templetes file for the author's home page 
+This is where the Author can create, review and edit articles. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/metadata', { title: 'Author Home' }); %>
+  <!-- Included Bootstrap CSS -->
+  <link href="/assets/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light text-dark">
+  <!-- Header included from partials folder -->
+  <%- include('./partials/header', { goto: 'reader' }); %>
+
+  <div class="container my-3">
+
+    <div class="row mb-4">
+      <!-- Added d-flex, align-items-center, and justify-content-between classes -->
+      <h1 class="text-primary border-bottom d-flex align-items-center justify-content-between">
+        Author Home Page
+        <!-- Added d-flex and align-items-center classes for vertical centering -->
+        <a href="/author/settings" class="btn btn-warning btn-sm">Blog Settings</a>
+      </h1>
+      <span class="fw-light">
+        Use this page to manage all the articles in this blog. This Page offers you with
+        the functionalities to manage draft and published articles on your blog.
+        As an Author you can edit, publish, or delete articles as needed.
+      </span>
+    </div>
+
+    <div class="row mb-3">
+      <!-- Added d-flex and align-items-center classes -->
+      <h4 class="text-primary border-bottom d-flex align-items-center justify-content-between">
+        Draft Articles
+        <!-- Added d-flex and align-items-center classes for vertical centering -->
+        <div class="btn-group" style="margin-top: -10px;">
+          <!-- Added inline style for margin-top to move the button up -->
+          <a href="/author/new" class="btn btn-warning btn-sm">Create New Draft</a>
+        </div>
+      </h4>
+
+      <% articles.filter(a=> !a.published).forEach(function(article) { %>
+        <%- include('./partials/article-card', article); %>
+      <% }); %>
+
+    </div>
+
+    <div class="row mb-3">
+      <h4 class="text-primary border-bottom">Published Articles</h4>
+
+      <% articles.filter(a=> a.published).forEach(function(article) { %>
+        <%- include('./partials/article-card', article); %>
+      <% }); %>
+
+    </div>
+
+    
+  </div>
+
+  <script>
+    function del(id) {
+      const result = confirm('Are you sure you want to delete this article?');
+      if (result) {
+        fetch('/author/delete/' + id, { method: 'DELETE' }).then(function (res) { location.reload(); });
+      }
+    }
+    function publish(id) {
+      const result = confirm('Are you sure you want to publish this article?');
+      if (result) {
+        fetch('/author/publish/' + id, { method: 'POST' }).then(function (res) { location.reload(); });
+      }
+    }
+  </script>
+
+</body>
+
+</html>

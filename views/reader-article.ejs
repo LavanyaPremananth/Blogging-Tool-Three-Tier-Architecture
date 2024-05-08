@@ -1,0 +1,81 @@
+<!-- This is the EJS templates for displaying an individual article in read mode. -->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/metadata', { title: 'Home' }); %>
+  <!-- Included Bootstrap CSS -->
+  <link href="/assets/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light text-secondary">
+  <!-- Header included from partials folder -->
+  <%- include('./partials/header'); %>
+
+  <div class="container my-4">
+
+    <h1 class="text-<%= color %> border-bottom border-<%= color %>">
+      <%= article.title %>
+    </h1>
+    <h4>
+      <%= article.subtitle %>
+      <button type="button" class="btn btn-<%= article.likes ? 'primary' : 'outline-' %><%= color %> btn-sm float-end" onclick="like()">
+        Like (<%= article.likes %>)
+      </button>
+    </h4>
+    <span class="fw-light">
+      <%= new Date(article.published).toLocaleString() %>
+    </span>
+
+    <p class="mt-5 mb-5 text-dark">
+      <!-- Render the raw HTML content correctly using <%- article.body %> -->
+      <%- article.body %>
+    </p>
+
+    <div class="mb-3">
+      <label for="comment" class="form-label">Leave your comment on this article</label>
+      <div class="input-group">
+        <textarea class="form-control text-bg-light border-<%= color %>" id="comment" name="comment" rows="3"></textarea>
+        <button type="button" class="btn btn-outline-<%= color %> btn-sm" onclick="comment()">
+          Comment
+        </button>
+      </div>
+    </div>
+
+    <% comments.forEach(function(comment) { %>
+      <div class="card text-bg-dark border-secondary mb-3">
+        <div class="card-body p-2">
+          <%= comment.body %>
+          <p class="card-subtitle fw-light">
+            <%= comment.created %>
+          </p>
+        </div>
+      </div>
+    <% }); %>
+
+    <div class="translate-middle">
+      <a class="btn btn-<%= color %> float-end" href="/" role="button">Return</a>
+    </div>
+  </div>
+
+  <script>
+    function like() {
+      fetch('/like/<%= article.id %>', { method: 'POST' }).then(function (res) { location.reload(); });
+    }
+
+    function comment() {
+      const value = document.querySelector('#comment').value;
+
+      if (value) {
+        const formData = new URLSearchParams({ comment: value });
+        fetch('/comment/<%= article.id %>', {
+          body: formData,
+          method: 'post'
+        }).then(function (res) { location.reload(); });
+      }
+    }
+  </script>
+</body>
+
+</html>

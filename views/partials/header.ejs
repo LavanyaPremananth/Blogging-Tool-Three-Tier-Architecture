@@ -1,0 +1,32 @@
+<header class="bg-dark text-white py-4">
+  <div class="container">
+    <div class="text-center">
+
+      <h1 class="display-4 fw-bold">
+        <a href="/" class="text-white text-decoration-none">
+          <%= global.settings.title %>
+        </a>
+      </h1>
+
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-0">
+          <%= global.settings.subtitle %>
+        </p>
+
+        <p class="fw-light">
+          <!-- The blog author's name fetched from global settings -->
+          <%= global.settings.author %>
+        </p>
+      </div>
+
+      <% if (locals.goto) { %>
+        <!-- If 'goto' is defined, create a button link to the specified home page (Reader/Author) -->
+        <a href="/<%= goto %>" class="btn btn-primary btn-sm mt-3">
+          <!-- Button text to indicate the home page destination (Reader/Author) -->
+          Go to <%= goto %> home
+        </a>
+      <% } %>
+
+    </div>
+  </div>
+</header>
