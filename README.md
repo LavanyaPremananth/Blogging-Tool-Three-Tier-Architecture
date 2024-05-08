@@ -1,79 +1,135 @@
-##  Coursework Template ##
-### CM2040 Database Networks and the Web ###
+# Blogging Tool - Three-Tier Architecture
 
-#### Installation requirements ####
+This project implements a feature-rich blogging tool using a three-tier architecture consisting of the Presentation Layer (Client), the Application Layer (Server), and the Data Layer (Database). The tool allows authors to create, edit, and publish articles with a rich text editor and includes Bootstrap integration for responsive and visually appealing design.
 
-* NodeJS 
-    - follow the install instructions at https://nodejs.org/en/
-    - we recommend using the latest LTS version
-* Sqlite3 
-    - Windows users: follow instructions here https://www.sqlitetutorial.net/download-install-sqlite/
-    - Mac users: it comes preinstalled
-    - Linux users: use a package manager eg. apt install
+## Website Architecture
 
-To install all the node packages run ```npm install``` from the project directory
+- **Presentation Layer (Client):**
+  - Built using HTML, CSS, and JavaScript.
+  - Communicates with the server through RESTful API endpoints.
+  - Enables viewing articles, creating new articles, editing existing articles, and managing author settings.
 
-#### Help with node SQLite3 ####
+- **Application Layer (Server):**
+  - Built using Node.js and Express.js.
+  - Handles client requests, business logic, and interactions with the database.
+  - Provides RESTful API endpoints for CRUD operations on articles and author settings.
 
-A few aspects SQLite3 work a little differently to mySql but all of the key concepts are the same
+- **Data Layer (Database):**
+  - Uses SQLite for storing articles and author settings.
+  - Server communicates with the database for read and write operations.
 
-Find the API documentation at:
-https://github.com/TryGhost/node-sqlite3/wiki/API
+## Features
 
-Find node SQLite tutorials at:
-https://www.sqlitetutorial.net/sqlite-nodejs/
-This also a good resource to find examples and tutorials around SQLite queries
+### Quill - Rich Text Editor Extension
 
+- Implemented using the Quill library for enhanced article editing.
+- Supports formatting options like bold, italic, lists, headers, colors, alignment, links, images, and videos.
+- Updates the hidden form field with editor content dynamically.
 
-#### Using this template ####
+### Bootstrap Integration
 
-This template sets you off in the right direction for your coursework. To get started:
+- Enhances front-end development and design.
+- Provides responsive design features for optimal user experience across devices.
+- Uses Bootstrap components (e.g., buttons, forms, cards) for a polished user interface.
+- Leverages Bootstrap's grid system for organized content layout.
+- Utilizes utility classes for specific layout and alignment requirements.
 
-Run ```npm run build-db``` to create the database (database.db)
-Run ```npm run start``` to start serving the web app (Access via http://localhost:3000)
+## Noteworthy Aspects
 
-You can also run: 
-```npm run clean-db``` to delete the database before rebuilding it for a fresh start
+### Code Organization & Readability
 
-##### Next steps #####
+- Well-commented codebase with explanations for complex logic.
+- Reusable partial EJS templates to reduce code duplication and ensure consistency.
+- Minimizes callback hell with structured and concise callback functions for maintainability.
 
-* Explore the file structure and code
-* Read all the comments
-* Try accessing each of the routes via the browser - make sure you understand what they do
-* Try creating ejs pages for each of the routes that retrieve and display the data
-* Try enhancing the ```create-user-record``` page so that you can set the text in the record 
-* Try adding new routes and pages to let the user create their own records
+markdown
+Copy code
+# Blogging Tool - Three-Tier Architecture
 
-##### Creating database tables #####
+This project implements a feature-rich blogging tool using a three-tier architecture consisting of the Presentation Layer (Client), the Application Layer (Server), and the Data Layer (Database). The tool allows authors to create, edit, and publish articles with a rich text editor and includes Bootstrap integration for responsive and visually appealing design.
 
-* All database tables should created by modifying the db_schema.sql 
-* This allows us to review and recreate your database simply by running ```npm run build-db```
-* Do NOT create or alter database tables through other means
+## Website Architecture
 
+- **Presentation Layer (Client):**
+  - Built using HTML, CSS, and JavaScript.
+  - Communicates with the server through RESTful API endpoints.
+  - Enables viewing articles, creating new articles, editing existing articles, and managing author settings.
 
-#### Preparing for submission ####
+- **Application Layer (Server):**
+  - Built using Node.js and Express.js.
+  - Handles client requests, business logic, and interactions with the database.
+  - Provides RESTful API endpoints for CRUD operations on articles and author settings.
 
-Make a copy of this folder
-In your copy, delete the following files and folders:
-    * node_modules
-    * .git (the hidden folder with your git repository)
-    * database.db (your database)
+- **Data Layer (Database):**
+  - Uses SQLite for storing articles and author settings.
+  - Server communicates with the database for read and write operations.
 
-Make sure that your package.json file includes all of the dependencies for your project NB. you need to use the ```--save``` tag each time you use npm to install a dependency
+## Features
 
-#### Getting started with my project ####
+### Quill - Rich Text Editor Extension
 
-Edit this section to include any settings that should be adjusted in configuration files and concise instructions for how to access the reader and author pages once the app is running.
+- Implemented using the Quill library for enhanced article editing.
+- Supports formatting options like bold, italic, lists, headers, colors, alignment, links, images, and videos.
+- Updates the hidden form field with editor content dynamically.
 
-NB. we will ONLY run ```npm install```, ```npm run build-db```, and ```npm run start``` . We will NOT install additional packages to run your code and will NOT run additional build scripts. Be careful with any additional node dependencies that you use.
+### Bootstrap Integration
 
-## Application routes ##
+- Enhances front-end development and design.
+- Provides responsive design features for optimal user experience across devices.
+- Uses Bootstrap components (e.g., buttons, forms, cards) for a polished user interface.
+- Leverages Bootstrap's grid system for organized content layout.
+- Utilizes utility classes for specific layout and alignment requirements.
 
-- **`/`** This is the root route, and it redirects to `/reader`.
-- **`/reader`** This is the front page which readers use to access the blog site.
-- **`/reader/:id`** This is where the reader can read and interact with individual articles.
-- **`/author`** This is where the Author can create, review and edit articles.
-- **`/author/new`** This is where the author creates an individual article.
-- **`/author/edit/:id`** This is where the author writes, amends, and publishes individual articles.
-- **`/author/settings`** This is where the Author can change the blog title, subtitle, and author name.
+## Noteworthy Aspects
 
+### Code Organization & Readability
+
+- Well-commented codebase with explanations for complex logic.
+- Reusable partial EJS templates to reduce code duplication and ensure consistency.
+- Minimizes callback hell with structured and concise callback functions for maintainability.
+
+## GitHub Repository Structure
+
+/public
+/css
+style.css
+/js
+script.js
+/views
+author-home.ejs
+reader-home.ejs
+author-edit.ejs
+partials
+article-card.ejs
+...
+app.js
+author.js
+database.js
+package.json
+README.md
+bash
+Copy code
+
+## Getting Started
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/blogging-tool.git
+
+2. Install dependencies:
+
+    cd blogging-tool
+    npm install
+   
+4. Start the server:
+
+    npm start
+
+5. Open the application in your browser:
+
+    http://localhost:3000
+
+# Additional Notes
+This project demonstrates a practical implementation of a three-tier architecture for a blogging platform.
+Contributions and feedback are welcome.
