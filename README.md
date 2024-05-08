@@ -54,13 +54,13 @@ This project implements a feature-rich blogging tool using a three-tier architec
   ```bash
     cd blogging-tool
     npm install
-   
-4. Start the server:
+
+3. Start the server:
 
   ```bash
     npm start
 
-5. Open the application in your browser:
+4. Open the application in your browser:
 
     http://localhost:3000
 
