@@ -50,15 +50,19 @@ This project implements a feature-rich blogging tool using a three-tier architec
    git clone https://github.com/your-username/blogging-tool.git
 
 2. Install dependencies:
-  
+
+  ```bash
     cd blogging-tool
     npm install
+  ```
 
-3. Start the server:
+4. Start the server:
 
+  ```bash
     npm start
+  ```
 
-4. Open the application in your browser:
+6. Open the application in your browser:
 
     http://localhost:3000
 
