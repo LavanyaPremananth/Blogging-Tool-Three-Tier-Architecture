@@ -51,16 +51,18 @@ This project implements a feature-rich blogging tool using a three-tier architec
 
 2. Install dependencies:
 
-  ```bash
+    ```bash
     cd blogging-tool
+    ```
+    ```bash
     npm install
-  ```
+    ```
 
 4. Start the server:
 
-  ```bash
+    ```bash
     npm start
-  ```
+    ```
 
 6. Open the application in your browser:
 
